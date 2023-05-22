@@ -21,6 +21,13 @@ export function TaskList() {
     setNewTasks(event.target.value)
   }
 
+  function handleDeleteTask(task) { 
+    const filteredTasks = tasks.filter(item => {
+      return item !== task;
+    })
+    setTasks(filteredTasks)
+  }
+
   return (
     <>
       <form onSubmit={handleCreateTask}>
@@ -42,7 +49,7 @@ export function TaskList() {
       <div className={styles.taskContainer}>
         {
           createdTasks ? tasks.map(task=> {
-            return <Task task={task}/>
+              return <Task key={task} task={task} handleDeleteTask={handleDeleteTask}/>
           }) : <NoTasks />
         }
       </div>
